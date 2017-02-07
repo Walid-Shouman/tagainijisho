@@ -57,3 +57,4 @@ pack/archlinux/pkg
 pack/archlinux/src
 pack/archlinux/*.tar.gz
 pack/archlinux/*.tar.xz
+venv/
