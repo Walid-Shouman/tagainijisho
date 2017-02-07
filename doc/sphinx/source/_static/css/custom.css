@@ -1,0 +1,16 @@
+/* import other css scripts here */
+/**
+ * Import other css scripts here
+ * This file is hardlinked into the output documentation
+ * @import "mystyle.css";
+ * Or import your url's like that
+ * @import url("mystyle.css");
+ *
+ * Note: changes in the css files don't invalidate the make html build,
+ * either make a fix for the Makefile or invalidate the build
+ * To invalidate the build:
+ *    1- Comment, make, uncomment and make for the breathe_projects line.
+ * Or 2- Make a change in the .rst files.
+ */
+
+@import "generated_docs.css";

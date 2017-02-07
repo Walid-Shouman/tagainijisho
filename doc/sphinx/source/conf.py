@@ -16,9 +16,12 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-# import os
-# import sys
+import os
+import sys
 # sys.path.insert(0, os.path.abspath('.'))
+
+# we assume project_dir/doc/sphinx/source filestructure
+project_dir = os.path.abspath('../../..')
 
 # -- General configuration ------------------------------------------------
 
@@ -31,7 +34,15 @@
 # ones.
 extensions = ['sphinx.ext.autodoc',
     'sphinx.ext.coverage',
-    'sphinx.ext.viewcode']
+    'sphinx.ext.viewcode',
+    'breathe']
+
+# we assume having doxygen output going to doc/doxygen/xml
+# use splat operator for joining lists
+breathe_projects = {
+        "tagainijisho": os.path.join(*[project_dir, "doc", "doxygen", "xml"])}
+
+breathe_default_project = "tagainijisho"
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -154,4 +165,9 @@ texinfo_documents = [
 ]
 
 
-
+# -- Manually append a CSS file -------------------------------------------
+def setup(app):
+    # may also be a URL, only works for filename: custom.css
+    # reason: it's pre-imported in the output file
+    # we can import other css files in the custom one
+    app.add_stylesheet('css/custom.css')

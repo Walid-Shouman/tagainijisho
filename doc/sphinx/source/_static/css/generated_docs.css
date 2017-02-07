@@ -1,0 +1,19 @@
+/* include all paragaraphs in the dd */
+dd p {
+    color: blue;
+}
+
+/* include lists in the comments */
+dd .simple {
+    color: blue;
+}
+
+/* Undo changes: titles with p that belong to grandparent dd, ie: Private Members ... etc. */
+.rubric {
+    color: black;
+}
+
+/* Undo changes: main class title */
+dd .class {
+    color: black;
+}
