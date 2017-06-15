@@ -14,7 +14,19 @@
 # MAX_DOT_GRAPH_DEPTH  = 0
 # DOT_TRANSPARENT      = YES
 
-# Generate UML diagrams
+# Basic Parameters
+PROJECT_NAME           = "Tagaini Jisho"
+
+RECURSIVE              = YES
+
+EXCLUDE_PATTERNS       = .git \
+                         venv \
+                         *.py
+
+GENERATE_XML           = YES
+
+
+# Generate UML diagrams parameters
 
 EXTRACT_ALL            = YES
 HAVE_DOT               = YES
