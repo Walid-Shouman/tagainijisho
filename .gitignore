@@ -58,3 +58,12 @@ pack/archlinux/src
 pack/archlinux/*.tar.gz
 pack/archlinux/*.tar.xz
 venv/
+
+# Doxygen generated files
+doc/doxygen/latex/
+doc/doxygen/html/
+doc/doxygen/xml/
+
+# Log files
+doc/doxygen/doxygen_output.log
+doc/sphinx/sphinx_output.log
