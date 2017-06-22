@@ -19,7 +19,13 @@ Contents:
    :caption: Contents:
 
    meta_doc
-   api/ASyncQuery
+   core/entries_classes
+   core/entries_coll_graph
+   core/entries_inheritance_graph
+
+core/entry_loading
+
+api/ASyncQuery
 
 
 Indices and tables

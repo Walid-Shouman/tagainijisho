@@ -25,9 +25,16 @@ EXCLUDE_PATTERNS       = .git \
 
 GENERATE_XML           = YES
 
-
 # Generate UML diagrams parameters
 
 EXTRACT_ALL            = YES
 HAVE_DOT               = YES
 UML_LOOK               = YES
+
+# extract private, package and static info
+EXTRACT_PRIVATE        = NO
+EXTRACT_PACKAGE        = NO
+EXTRACT_STATIC         = NO
+
+# avoid limiting the fields shown in the diagrams
+UML_LIMIT_NUM_FIELDS   = 0
