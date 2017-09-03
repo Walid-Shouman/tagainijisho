@@ -33,7 +33,7 @@ Kanjidic2EntrySearcher::Kanjidic2EntrySearcher() : EntrySearcher(KANJIDIC2ENTRY_
 
 	QueryBuilder::Order::orderingWay["freq"] = QueryBuilder::Order::DESC;
 
-	validCommands << "kanji" << "romaji" << "kana" << "mean" << "jlpt" << "grade" << "stroke" << "radical" << "component" << "unicode" << "skip" << "fourcorner" << "kanjidic";
+	validCommands << "kanji" << "romaji" << "kana" << "mean" << "jlpt" << "grade" << "stroke" << "radical" << "component" << "heisig" << "unicode" << "skip" << "fourcorner" << "kanjidic";
 }
 
 SearchCommand Kanjidic2EntrySearcher::commandFromWord(const QString &word) const
@@ -194,6 +194,15 @@ void Kanjidic2EntrySearcher::buildStatement(QList<SearchCommand> &commands, Quer
 				if (!valid) continue;
 			}
 		}
+		else if (command.command() == "heisig") {
+			if (command.args().size() > 1) continue;
+			if (command.args().size() == 1) {
+                		bool ok;
+                		int code = command.args()[0].toInt(&ok, 10);
+				if (!ok) continue;
+				statement.addWhere(QString("kanjidic2.entries.heisig = %1").arg(code));
+            		}
+        	}
 		else if (command.command() == "unicode") {
 			if (command.args().size() > 1) continue;
 			if (command.args().size() == 1) {

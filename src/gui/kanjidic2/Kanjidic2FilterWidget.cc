@@ -41,7 +41,7 @@ static void prepareFourCornerComboBox(QComboBox *box)
 
 Kanjidic2FilterWidget::Kanjidic2FilterWidget(QWidget *parent) : SearchFilterWidget(parent, "kanjidic")
 {
-	_propsToSave << "strokeCount" << "isStrokeRange" << "maxStrokeCount" << "radicals" << "components" << "unicode" << "skip" << "fourCorner" << "grades";
+	_propsToSave << "strokeCount" << "isStrokeRange" << "maxStrokeCount" << "radicals" << "components" << "heisig" << "unicode" << "skip" << "fourCorner" << "grades";
 
 	QGroupBox *_strokeCountGroupBox = new QGroupBox(tr("Stroke count"), this);
 	connect(_strokeCountGroupBox, SIGNAL(toggled(bool)), this, SLOT(commandUpdate()));
@@ -90,6 +90,14 @@ Kanjidic2FilterWidget::Kanjidic2FilterWidget(QWidget *parent) : SearchFilterWidg
 		_compKSelector = 0;
 		_components->installEventFilter(this);
 		vLayout->addWidget(_components);
+	}
+	QGroupBox *heisigGroupBox = new QGroupBox(tr("Heisig"), this);
+	{
+		QHBoxLayout *hLayout = new QHBoxLayout(heisigGroupBox);
+		_heisig = new TJSpinBox(heisigGroupBox, "[0-9]{0,6}", 10);
+		_heisig->setRange(0, 3007);
+		connect(_heisig, SIGNAL(valueChanged(int)), this, SLOT(delayedCommandUpdate()));
+		hLayout->addWidget(_heisig);
 	}
 	QGroupBox *unicodeGroupBox = new QGroupBox(tr("Unicode"), this);
 	{
@@ -176,6 +184,7 @@ Kanjidic2FilterWidget::Kanjidic2FilterWidget(QWidget *parent) : SearchFilterWidg
 	QHBoxLayout *mainLayout = new QHBoxLayout(this);
 	mainLayout->addWidget(_strokeCountGroupBox);
 	mainLayout->addWidget(componentsGroupBox);
+	mainLayout->addWidget(heisigGroupBox);
 	mainLayout->addWidget(unicodeGroupBox);
 	mainLayout->addWidget(skipGroupBox);
 	mainLayout->addWidget(fourCornerGroupBox);
@@ -359,6 +368,7 @@ QString Kanjidic2FilterWidget::currentCommand() const
 			ret += QString("\"%1\"").arg(c);
 		}
 	}
+	if (_heisig->value()) ret += QString(" :heisig=%1").arg(_heisig->text());
 	if (_unicode->value()) ret += QString(" :unicode=%1").arg(_unicode->text());
 	if (_skip1->value() || _skip2->value() || _skip3->value()) ret += QString(" :skip=%1").arg(skip());
 	if (_fcTopLeft->currentIndex() > 0 || _fcTopRight->currentIndex() > 0 || _fcBotLeft->currentIndex() > 0 || _fcBotRight->currentIndex() > 0 || _fcExtra->currentIndex() > 0) ret += QString(" :fourcorner=%1").arg(fourCorner());
@@ -424,6 +434,7 @@ void Kanjidic2FilterWidget::_reset()
 	_strokeCountSpinBox->setValue(0);
 	_maxStrokeCountSpinBox->setValue(0);
 	_rangeCheckBox->setChecked(false);
+	_heisig->setValue(0);
 	_unicode->setValue(0);
 	_skip1->setValue(0);
 	_skip2->setValue(0);

@@ -40,6 +40,7 @@ private:
 	RadicalKanjiSelector *_radKSelector;
 	QLineEdit *_components;
 	ComponentKanjiSelector *_compKSelector;
+	QSpinBox *_heisig;
 	QSpinBox *_unicode;
 	QSpinBox *_skip1, *_skip2, *_skip3;
 	QComboBox *_fcTopLeft, *_fcTopRight, *_fcBotLeft, *_fcBotRight, *_fcExtra;
@@ -79,6 +80,10 @@ public:
 	QString components() const { return _components->text(); }
 	void setComponents(const QString &value) { _components->setText(value); }
 	Q_PROPERTY(QString components READ components WRITE setComponents)
+
+	int heisig() const { return _heisig->value(); }
+	void setHeisig(int value) { _heisig->setValue(value); }
+	Q_PROPERTY(int heisig READ heisig WRITE setHeisig)
 
 	int unicode() const { return _unicode->value(); }
 	void setUnicode(int value) { _unicode->setValue(value); }
